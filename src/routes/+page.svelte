@@ -2,6 +2,12 @@
 	import Map from '$lib/Map.svelte';
 	import { onMount } from 'svelte';
 
+	import type { PageData } from './$types';
+	export let data: PageData;
+
+	const { avatar_url } = data.user;
+	console.log(avatar_url);
+
 	let gameMap: Map;
 	let x = 0;
 	let y = 0;
@@ -28,17 +34,29 @@
 	<title>x0y0</title>
 </svelte:head>
 
-<div class="col w-fill h-fill">
-	<Map bind:this={gameMap} {x} {y} {w} {h} {tile_size} />
+<div class="float">
+	<a href="https://github.com/settings/connections/applications/{data.GITHUB_CLIENT_ID}">
+		GitHub Tokens
+	</a>
+</div>
+<div id="game" class="col w-fill h-fill">
+	<Map bind:this={gameMap} {avatar_url} {x} {y} {w} {h} {tile_size} />
 </div>
 
 <style>
-	div {
+	#game {
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
 		position: relative;
 		width: 100%;
 		height: 100%;
+	}
+
+	.float {
+		z-index: 10;
+		position: absolute;
+		top: 0;
+		right: 0;
 	}
 </style>

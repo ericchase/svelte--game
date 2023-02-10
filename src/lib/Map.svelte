@@ -1,10 +1,9 @@
 <script lang="ts">
-	import PlayerImage from '$lib/images/chase.png';
-
 	import { Entity } from '$lib/Entity';
 
 	import { onMount } from 'svelte';
 
+	export let avatar_url: string;
 	export let x = 0;
 	export let y = 0;
 	export let w = 0;
@@ -24,7 +23,8 @@
 		pointer.index = 1;
 
 		player = createEntity();
-		player.el.style.setProperty('background-image', `url(${PlayerImage})`);
+		player.el.style.setProperty('background-image', `url(${avatar_url})`);
+		player.el.style.setProperty('background-size', '40px 40px');
 
 		gameMap.addEventListener('mousemove', updatePointer);
 		gameMap.addEventListener('mousedown', commandMove);
